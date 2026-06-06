@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RELATIONSHIP LAB | アニマル特性で創る最強のチームビルディング</title>
+  <meta name="description" content="メンバー個々の「仕事スタイル」「強み・弱み」「やる気スイッチ」を見える化し、お互いを活かし合う最強のチームづくりをサポートする関係性分析ツールです。">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤝</text></svg>">
+</head>
+<body>
+
+  <!-- ======== Navigation ======== -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="nav-logo">
+        <span class="logo-accent">✦</span>
+        <span class="logo-text">RELATIONSHIP LAB</span>
+        <span class="logo-sub">関係性ラボ</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li>
+          <a href="#setup-section">
+            <span class="link-en">DIAGNOSIS</span>
+            <span class="link-ja">チーム診断</span>
+          </a>
+        </li>
+        <li>
+          <a href="#navbar">
+            <span class="link-en">TOP</span>
+            <span class="link-ja">トップ</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ======== Hero Section (Editorial Magazine Style) ======== -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-meta">
+        <span class="meta-date">ORGANIZATION ANALYSIS</span>
+        <span class="meta-separator">|</span>
+        <span class="meta-category">12 CHARACTER SYSTEM</span>
+      </div>
+      
+      <h1 class="hero-title">
+        <span class="font-serif">個性を活かし、強みを繋ぐ。</span>
+        <span class="gradient-text font-serif">チームビルディング分析</span>
+      </h1>
+      
+      <p class="hero-subtitle">
+        メンバーそれぞれの「本来の才能」と「行動スタイル」を可視化。<br>
+        お互いの強みを引き出し、弱みを補い合うことで、<br>
+        心理的安全性が高くパフォーマンスを最大化できるチーム設計を支援します。
+      </p>
+    </div>
+  </section>
+
+  <!-- ======== Main Setup Area (Form & Presets) ======== -->
+  <section class="setup-section" id="setup-section">
+    <div class="container">
+      <div class="setup-grid">
+        
+        <!-- Member Inputs Card -->
+        <div class="glass-card">
+          <div style="margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+            <h3 class="serif-title" style="font-size: 1.35rem; color: var(--primary);">MEMBER REGISTRATION / メンバー登録</h3>
+            <p style="font-size: 0.8rem; color: var(--text-sub); margin-top: 4px;">メンバーの名前と、アニマル番号（または生年月日）を入力してください。※最大12名まで</p>
+          </div>
+          
+          <form id="teamForm" onsubmit="event.preventDefault();">
+            <div class="member-inputs" id="memberInputs">
+              <!-- JSで動的に追加されますが、初期表示として2行用意 -->
+              <div class="member-row" id="memberRow1">
+                <span class="member-num">01</span>
+                <input type="text" class="form-input name-input" placeholder="名前" required data-idx="1">
+                <input type="number" class="form-input number-input" placeholder="番号(1-60)" min="1" max="60" data-idx="1">
+                <span style="font-size: 0.75rem; color: var(--text-muted);">または生年月日</span>
+                <input type="date" class="form-input date-input" data-idx="1" style="max-width: 140px; padding: 6px 8px;">
+                <button type="button" class="remove-btn" onclick="removeMemberRow(1)">×</button>
+              </div>
+              <div class="member-row" id="memberRow2">
+                <span class="member-num">02</span>
+                <input type="text" class="form-input name-input" placeholder="名前" required data-idx="2">
+                <input type="number" class="form-input number-input" placeholder="番号(1-60)" min="1" max="60" data-idx="2">
+                <span style="font-size: 0.75rem; color: var(--text-muted);">または生年月日</span>
+                <input type="date" class="form-input date-input" data-idx="2" style="max-width: 140px; padding: 6px 8px;">
+                <button type="button" class="remove-btn" onclick="removeMemberRow(2)">×</button>
+              </div>
+            </div>
+            
+            <button type="button" class="add-member-btn" id="addMemberBtn">＋ メンバーを追加 (2/12)</button>
+            
+            <div style="margin-top: 32px; display: flex; gap: 16px;">
+              <button type="button" class="btn btn-primary" id="analyzeBtn" style="flex: 1;">
+                <span>関係性レポートを生成する</span>
+                <span class="btn-sub-text">TEAMS RELATIONSHIP REPORT</span>
+              </button>
+            </div>
+          </form>
+        </div>
+        
+        <!-- Preset Panel -->
+        <div class="preset-area">
+          <div class="glass-card" style="height: 100%;">
+            <div style="margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+              <h3 class="serif-title" style="font-size: 1.15rem; color: var(--text-main);">PRESET / チーム構成サンプル</h3>
+              <p style="font-size: 0.75rem; color: var(--text-sub); margin-top: 2px;">診断のデモ体験用に、あらかじめ設定されたチーム構成データをロードできます。</p>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="preset-card" data-preset="sales">
+                <div class="preset-info">
+                  <h4>📊 新規開拓営業部</h4>
+                  <p>チータ（スタートダッシュ）とライオン（カリスマ）が率いる高熱量チーム</p>
+                </div>
+                <span class="preset-arrow">✦</span>
+              </div>
+              <div class="preset-card" data-preset="dev">
+                <div class="preset-info">
+                  <h4>💻 システム開発ユニット</h4>
+                  <p>狼（スペシャリスト）と子守熊（戦略参謀）が集う実力派リアリスト集団</p>
+                </div>
+                <span class="preset-arrow">✦</span>
+              </div>
+              <div class="preset-card" data-preset="pr">
+                <div class="preset-info">
+                  <h4>🎨 クリエイティブ推進室</h4>
+                  <p>ペガサス（天才イノベーター）とたぬき（潤滑油）が織りなす発想力チーム</p>
+                </div>
+                <span class="preset-arrow">✦</span>
+              </div>
+              <div class="preset-card" data-preset="perfect">
+                <div class="preset-info">
+                  <h4>🌟 バランス型PJチーム</h4>
+                  <p>MOON・EARTH・SUNが完璧な比率で共存する死角なしの最強ユニット</p>
+                </div>
+                <span class="preset-arrow">✦</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ======== Analysis Results Area (Dynamically displayed) ======== -->
+  <section class="result-section" id="resultSection">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="section-header">
+        <span class="section-num">01 / DASHBOARD</span>
+        <h2 class="serif-title" style="font-size: 2rem;">チーム・ダイナミクス</h2>
+        <span class="section-sub">TEAM DYNAMICS & ANALYSIS</span>
+        <div class="header-divider"></div>
+      </div>
+
+      <!-- Dashboard Layout -->
+      <div class="result-grid-top">
+        
+        <!-- Left: Vibes Chart & Comments -->
+        <div class="glass-card balance-chart-card">
+          <div>
+            <div class="chart-header">
+              <h3 class="serif-title" style="font-size: 1.25rem; margin-bottom: 4px;">チームの意思決定・エネルギー比率</h3>
+              <p style="font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.05em;">MOON / EARTH / SUN 三分類分析</p>
+            </div>
+            
+            <div class="chart-bars">
+              <!-- MOON -->
+              <div class="chart-bar-col">
+                <div class="chart-bar-container">
+                  <div class="chart-bar-fill" id="barMoon" style="background: var(--moon-gradient);"></div>
+                </div>
+                <div class="chart-label" style="color: var(--moon);">🌙 MOON (人情)</div>
+                <div class="chart-count font-outfit" id="countMoon" style="color: var(--moon);">0</div>
+              </div>
+              <!-- EARTH -->
+              <div class="chart-bar-col">
+                <div class="chart-bar-container">
+                  <div class="chart-bar-fill" id="barEarth" style="background: var(--earth-gradient);"></div>
+                </div>
+                <div class="chart-label" style="color: var(--earth);">🌍 EARTH (成果)</div>
+                <div class="chart-count font-outfit" id="countEarth" style="color: var(--earth);">0</div>
+              </div>
+              <!-- SUN -->
+              <div class="chart-bar-col">
+                <div class="chart-bar-container">
+                  <div class="chart-bar-fill" id="barSun" style="background: var(--sun-gradient);"></div>
+                </div>
+                <div class="chart-label" style="color: var(--sun);">☀️ SUN (直感)</div>
+                <div class="chart-count font-outfit" id="countSun" style="color: var(--sun);">0</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="chart-comment" id="teamVibeComment">
+            チーム全体のエネルギーや意思決定のバランスが表示されます。
+          </div>
+        </div>
+
+        <!-- Right: Specific Advice and Warnings -->
+        <div class="advice-container" id="adviceContainer">
+          <!-- JSで動的に追加されます -->
+        </div>
+
+      </div>
+
+      <!-- SVG Chemistry Map -->
+      <div class="glass-card map-card">
+        <div class="chart-header" style="margin-bottom: 32px;">
+          <h3 class="serif-title" style="font-size: 1.4rem; margin-bottom: 4px;">チーム相関図（シナジーマップ）</h3>
+          <p style="font-size: 0.75rem; color: var(--text-sub); max-width: 500px; margin: 6px auto 0; line-height: 1.5;">
+            メンバー間の仕事における補完関係・相性を視覚化。線の太さが太く色が濃いほど、ビジネス上で強力なシナジー（相乗効果）を放つ組み合わせです。ノードをクリックすると、個人の詳細プロファイルが表示されます。
+          </p>
+        </div>
+        
+        <div class="map-container-wrapper">
+          <svg class="map-svg-canvas" id="chemistryLines"></svg>
+          <div id="mapNodesContainer"></div>
+        </div>
+
+        <!-- Legend -->
+        <div class="map-legend">
+          <div class="legend-item">
+            <span class="legend-dot" style="background-color: #2d6a7a;"></span>
+            <span>🤝 ベストパートナー (90点〜)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background-color: #7c6dab;"></span>
+            <span>💼 最強タッグ (80点〜)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background-color: #5a8a6a;"></span>
+            <span>☕ 心地よい関係 (70点〜)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background-color: #d4944a;"></span>
+            <span>📚 成長し合える (60点〜)</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-dot" style="background-color: #c0392b;"></span>
+            <span>⚡ スパイスの関係 (0点〜)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Pairs Section -->
+      <div style="margin-top: 48px; margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px;">
+        <h3 class="serif-title" style="font-size: 1.25rem; color: var(--primary);">KEY SYNERGY / 特筆すべき最強タッグ</h3>
+      </div>
+      <div class="pairs-grid" id="synergyPairsGrid">
+        <!-- JSで動的に追加されます -->
+      </div>
+
+      <!-- Members Grid Section -->
+      <div class="section-header members-grid-title" id="members-detail-anchor">
+        <span class="section-num">02 / PROFILES</span>
+        <h2 class="serif-title" style="font-size: 2rem;">メンバー仕事特性図鑑</h2>
+        <span class="section-sub">INDIVIDUAL WORK PROFILES</span>
+        <div class="header-divider"></div>
+      </div>
+      
+      <div class="members-cards-container" id="membersCardsContainer">
+        <!-- JSで動的に追加されます -->
+      </div>
+
+      <!-- Action Button Area -->
+      <div style="display: flex; justify-content: center; margin-top: 48px;">
+        <button class="btn btn-secondary" onclick="copyTeamAnalysisReport()" style="padding: 12px 36px;">
+          <span>分析レポートをコピーする</span>
+          <span class="btn-sub-text">COPY REPORT TEXT</span>
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======== Footer ======== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-logo font-serif">RELATIONSHIP LAB</div>
+      <p class="footer-copy">© 2026 RELATIONSHIP LAB. All Rights Reserved.</p>
+      <p class="footer-note">
+        ※ 当サイトは12のアニマル特性分類（12分類）のデータに基づいたチーム分析コンサルティングツールです。<br>
+        出典元：動物特性・行動心理特性研究データ
+      </p>
+    </div>
+  </footer>
+
+  <!-- ======== Modal Popup (Work Profile details) ======== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal" id="modalContent">
+      <!-- Dynamic populated -->
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
