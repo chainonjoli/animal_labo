@@ -1136,3 +1136,111 @@ a:hover {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
 }
+
+/* ======== Responsive Design / レスポンシブ対応 (スマホ・タブレット用) ======== */
+@media (max-width: 768px) {
+  /* ヘッダー全体の余白調整 */
+  .navbar {
+    padding: 10px 0;
+  }
+  .navbar .container {
+    padding: 0 16px;
+  }
+  .nav-logo {
+    gap: 4px;
+  }
+  .logo-accent {
+    font-size: 1rem;
+  }
+  .logo-text {
+    font-size: 0.95rem;
+    letter-spacing: 0.05em;
+    white-space: nowrap;
+  }
+  .logo-sub {
+    font-size: 0.55rem;
+    padding-left: 6px;
+    margin-left: 2px;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+  .nav-links {
+    gap: 12px;
+  }
+  .nav-links a {
+    align-items: center;
+  }
+  .link-en {
+    font-size: 0.6rem;
+    letter-spacing: 0.05em;
+  }
+  .link-ja {
+    font-size: 0.65rem;
+  }
+
+  /* メンバー入力行のレスポンシブ化 */
+  .member-row {
+    flex-wrap: wrap;
+    padding: 14px 12px;
+    gap: 8px 10px;
+    position: relative;
+  }
+  .member-num {
+    width: 20px;
+    font-size: 0.9rem;
+  }
+  .name-input {
+    flex: 1 1 calc(100% - 150px);
+    min-width: 100px;
+  }
+  .number-input {
+    width: 80px;
+    flex: 0 0 80px;
+  }
+  .member-row span:not(.member-num) {
+    width: 100%;
+    margin-left: 30px; /* 番号の横から始まるように折り返す */
+    margin-top: 4px;
+    font-size: 0.7rem !important;
+  }
+  .date-input {
+    flex: 1 1 150px;
+    margin-left: 30px;
+    max-width: none !important;
+  }
+  .remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* 幅480px以下の極小画面対応 */
+  .logo-sub {
+    display: none; /* 「関係性ラボ」を非表示にし、ロゴが重なるのを完全に防ぎます */
+  }
+  .logo-text {
+    font-size: 0.85rem;
+  }
+  .nav-links {
+    gap: 10px;
+  }
+  .link-en {
+    font-size: 0.55rem;
+  }
+  .link-ja {
+    font-size: 0.6rem;
+  }
+  
+  /* メンバー入力行の微調整：名前を単独行にし、入力しやすくします */
+  .name-input {
+    flex: 1 1 100%;
+    margin-left: 30px;
+  }
+  .number-input {
+    flex: 1 1 calc(100% - 50px);
+    margin-left: 30px;
+  }
+}
+
